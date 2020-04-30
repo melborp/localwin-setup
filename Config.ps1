@@ -5,6 +5,7 @@
     ToolsPath = 'C:\tools';
     LocalReposFolder = "C:\repos";
     PSProfileFilename = "Microsoft.PowerShell_profile.ps1";
+    Git = @{ Username = "Taavi Koosaar"; Email = "taavi@someemail.com"; Prune = "true";}
     ChocoPackages = @(
         @{ Name = "powershell-core" };
         @{ Name = "7zip" };

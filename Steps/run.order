@@ -1,0 +1,10 @@
+Install-Base
+Install-Choco
+Configure-Folders
+Install-ChocoPackages
+Configure-EnvironmentVariables
+Install-PsModules
+Install-ZipPackages
+Install-NpmGlobalTools
+Install-VsCodeExtensions
+Configure-Profile

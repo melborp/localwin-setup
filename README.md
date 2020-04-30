@@ -7,3 +7,8 @@ Its an experimentation corner of how to automate local machine setup.
 
 - Chocolatey
 - Powershell and Powershell Core 
+
+# How to run it?
+
+1. Create your own config.ps1 to define the choco packages, npm packages, zip downloads, etc that you want to configure.
+2. Run as Admin in powershell `Setup-Machine.ps1 -ConfigFilePath .\ConfigFileNameHere.ps1`

@@ -28,3 +28,11 @@ OR
 $Config = .\Config.ps1
 .\Steps\Configure-Profile.ps1 -Config $Config
 ```
+
+# Updating current configuration with new versions
+
+Just re-run Setup-Machine.ps1.
+
+> **Note** If you have Version attribute specified for package, then you need to change the version manually in `Config.ps1` to cause it to get upgraded. 
+
+> **Note** For Side-By-Side installation  such as dotnetcoresdk you need to add a new item into the array with the new version, since you normally want to keep the old versions.

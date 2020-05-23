@@ -46,6 +46,8 @@
         @{ Name = "visualstudio2019-workload-netweb"; };
         @{ Name = "visualstudio2019-workload-node"; };
         @{ Name = "visualstudio2019-workload-data"; };
+        @{ Name = "microsoft-windows-terminal"; };
+        
     );
     NpmGlobalTools = @(
         "npm",
@@ -58,6 +60,7 @@
     );
     VsCodeExtensions = @(
         "ms-vscode.csharp",
+        "ms-dotnettools.csharp",
         "ms-vscode.PowerShell",
         "vscode-icons-team.vscode-icons",
         "eamodio.gitlens",

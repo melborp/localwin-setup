@@ -73,14 +73,16 @@
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "streetsidesoftware.code-spell-checker",
         "MS-vsliveshare.vsliveshare",
-        "msjsdiag.debugger-for-chrome"
+        "msjsdiag.debugger-for-chrome",
+        "ms-vscode-remote.remote-wsl"
     );
     #PsModules = @(@{ Name = "";});
     ZipInstallSoftware = @(
         #@{ Url = "";}
     );
     ZipInstallTools =  @(
-        @{ Url = "https://github.com/microsoft/terminal/releases/download/1904.29002/ColorTool.zip"; FolderName = "ColorTool"; }
+        # Colorscheme "One Half Dark" is builtin to windows terminal, no color tool needed.
+        #@{ Url = "https://github.com/microsoft/terminal/releases/download/1904.29002/ColorTool.zip"; FolderName = "ColorTool"; }
     );
     EnvironmentPathAdd = @(
         "C:\Python27amd64"

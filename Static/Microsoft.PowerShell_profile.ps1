@@ -5,6 +5,8 @@
     
     #Set-Location __LocalReposFolder__ -Verbose
 
+    # look to replace poshgit with powerline
+    # https://github.com/Jaykul/PowerLine
     Import-Module '__ToolsPath__\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psm1'
 
     #__ToolsPath__\ColorTool\ColorTool.exe -q __ToolsPath__\ColorTool\schemes\OneHalfDark.itermcolors

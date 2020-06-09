@@ -26,6 +26,7 @@
         @{ Name = "dotnetcore-sdk"; Version = "3.0.103"; Args = "--side-by-side" };
         @{ Name = "dotnetcore-sdk"; Version = "3.1.102"; Args = "--side-by-side" };
         @{ Name = "dotnetcore-sdk"; Version = "3.1.201"; Args = "--side-by-side" };        
+        @{ Name = "dotnetcore-sdk"; Version = "3.1.301"; Args = "--side-by-side" };        
         @{ Name = "curl" };
         @{ Name = "Nuget.CommandLine"; Version = "5.5.1"; };
         @{ Name = "openjdk11"; };

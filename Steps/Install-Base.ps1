@@ -11,4 +11,4 @@ Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Verbose -Confirm $False
 
 # Enable WSL2 in v2004 of Windows,  this will want to reboot and then offer another update and reboot
-Enable-WindowsOptionalFeature -Online -FeatureName $("VirtualMachinePlatform", "Microsoft-Windows-Subsystem-Linux")
+#Enable-WindowsOptionalFeature -Online -FeatureName $("VirtualMachinePlatform", "Microsoft-Windows-Subsystem-Linux")

@@ -11,7 +11,7 @@ $Config.ChocoPackages | Foreach-Object {
         choco install $($_.Name) --no-progress --version=$($_.Version) -y $_.Args
     } else {
         $items = choco search -l $($_.Name) | select-string $($_.Name) -List
-        if ($items.Length -gt 1) {
+        if ($items.Length -gt 0) {
             choco upgrade $($_.Name) --no-progress -y $_.Args
         } else {
             choco install $($_.Name) --no-progress -y $_.Args

@@ -15,9 +15,7 @@ try {
 
     $Config = & $ConfigFilePath
 
-    $order = Get-Content .\Steps\run.order
-
-    $order | ForEach-Object { 
+    $Config.DefaultRunSteps | ForEach-Object { 
       $step = $_ #file name
       if ($RunSteps.Length -gt 0 -and (-not $RunSteps.Contains($step))) {
         Write-Message "Skipping step '$step'. It is not part of the RunSteps specified."

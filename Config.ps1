@@ -1,4 +1,17 @@
 ﻿$Config = @{
+    DefaultRunSteps = @(
+        "Install-Base",
+        "Install-Choco",
+        "Configure-Folders",
+        "Install-ChocoPackages",
+        "Configure-EnvironmentVariables",
+        "Install-Ps5Modules",
+        "Install-Ps7Modules",
+        "Install-ZipPackages",
+        "Install-NpmGlobalTools",
+        "Install-VsCodeExtensions",
+        "Configure-Profile"
+    );
     LocalPaths = @('c:\repos','c:\cache\npm','c:\cache\nuget','c:\cache\software','c:\tools', 'C:\Software');
     CacheRootLocation = 'c:\cache';
     SoftwarePath = 'C:\Software';
@@ -11,14 +24,11 @@
         @{ Name = "7zip" };
         @{ Name = "vscode" };
         @{ Name = "git" };
-        @{ Name = "poshgit" };
         @{ Name = "googlechrome" };
         @{ Name = "microsoft-teams"; };
         @{ Name = "microsoft-edge"; };
-        @{ Name = "slack"; };
         @{ Name = "foxitreader"; };
         @{ Name = "docker-desktop" };
-        @{ Name = "vlc" };
         @{ Name = "azure-data-studio"; };
         @{ Name = "sql-server-management-studio"; };
         @{ Name = "nodejs-lts"; };
@@ -26,6 +36,7 @@
         @{ Name = "dotnetcore-sdk"; Version = "3.0.103"; Args = "--side-by-side" };
         @{ Name = "dotnetcore-sdk"; Version = "3.1.102"; Args = "--side-by-side" };
         @{ Name = "dotnetcore-sdk"; Version = "3.1.201"; Args = "--side-by-side" };        
+        @{ Name = "dotnetcore-sdk"; Version = "3.1.301"; Args = "--side-by-side" };        
         @{ Name = "curl" };
         @{ Name = "Nuget.CommandLine"; Version = "5.5.1"; };
         @{ Name = "openjdk11"; };
@@ -73,25 +84,43 @@
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "streetsidesoftware.code-spell-checker",
         "MS-vsliveshare.vsliveshare",
-        "msjsdiag.debugger-for-chrome"
+        "msjsdiag.debugger-for-chrome",
+        "ms-vscode-remote.remote-wsl",
+        "redhat.vscode-yaml",
+        "eriklynd.json-tools",
+        "mariusalchimavicius.json-to-ts"
     );
-    #PsModules = @(@{ Name = "";});
+    Ps5InstallModuleCommands = @(
+        "Install-Module -Name Az -AllowClobber -Scope AllUsers -Verbose -Force",
+        "Install-Module -Name PSScriptAnalyzer",
+        "Install-Module -Name posh-git",
+        "Install-Module -Name oh-my-posh"
+    );
+    Ps7InstallModuleCommands = @(
+        "Install-Module -Name Az -AllowClobber -Scope AllUsers -Verbose -Force",
+        "Install-Module -Name PSScriptAnalyzer",
+        "Install-Module -Name posh-git",
+        "Install-Module -Name oh-my-posh",
+        "Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck"
+    );
     ZipInstallSoftware = @(
         #@{ Url = "";}
     );
     ZipInstallTools =  @(
-        @{ Url = "https://github.com/microsoft/terminal/releases/download/1904.29002/ColorTool.zip"; FolderName = "ColorTool"; }
+        # Colorscheme "One Half Dark" is builtin to windows terminal, no color tool needed.
+        #@{ Url = "https://github.com/microsoft/terminal/releases/download/1904.29002/ColorTool.zip"; FolderName = "ColorTool"; }
     );
+    
     EnvironmentPathAdd = @(
         "C:\Python27amd64"
     );
     EnvironmentPathRemove = @(
     );
+    #Value for Scope can be "User, Machine, All" where User = User + Process; Machine = Machine + Process; All = all 3 scopes are applied.
     EnvironmentVarsAdd = @(
-        @{ VarName = "NPM_CONFIG_PREFIX"; VarValue = "c:\cache\npm\prefix";}
-        @{ VarName = "NPM_CONFIG_CACHE"; VarValue = "c:\cache\npm\cache";}
-        @{ VarName = "NUGET_PACKAGES"; VarValue = "c:\cache\nuget";}
-        
+        @{ VarName = "NPM_CONFIG_PREFIX"; VarValue = "c:\cache\npm\prefix"; Scope = "All"; }
+        @{ VarName = "NPM_CONFIG_CACHE"; VarValue = "c:\cache\npm\cache"; Scope = "All"; }
+        @{ VarName = "NUGET_PACKAGES"; VarValue = "c:\cache\nuget"; Scope = "All"; }        
     );
     EnvironmentVarsRemove = @(
         #@{ Name = ""; }

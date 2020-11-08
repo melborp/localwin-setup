@@ -1,0 +1,1 @@
+.\Steps\Install-ChocoPackages.ps1 -Config $config

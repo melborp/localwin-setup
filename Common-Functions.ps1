@@ -12,19 +12,24 @@ function Write-Message([string] $Message) {
     $timestamp = (Get-Date).ToString("yyyy-MM-dd_hhmmss")
     Write-Host "$timestamp`: $Message" -Verbose
 }
-function Set-EnvironmentVariable([string] $VarName, [string] $VarValue) {
+#Value for Scope can be "User, Machine, All" where User = User + Process; Machine = Machine + Process; All = all 3 scopes are applied.
+function Set-EnvironmentVariable([string] $VarName, [string] $VarValue, [ValidateSet("All", "User", "Machine")][String]$Scope = "All") {
     Write-Message -Message "Add environment variable '$VarName'"
-    [System.Environment]::SetEnvironmentVariable($VarName, $VarValue, [System.EnvironmentVariableTarget]::Machine)
+    
+    # Always change in process scope
     [System.Environment]::SetEnvironmentVariable($VarName, $VarValue, [System.EnvironmentVariableTarget]::Process)
-    [System.Environment]::SetEnvironmentVariable($VarName, $VarValue, [System.EnvironmentVariableTarget]::User)
+    if ($Scope -eq "All" -or $Scope -eq "Machine") {
+        [System.Environment]::SetEnvironmentVariable($VarName, $VarValue, [System.EnvironmentVariableTarget]::Machine)
+    }
+    if ($Scope -eq "All" -or $Scope -eq "User") {
+        [System.Environment]::SetEnvironmentVariable($VarName, $VarValue, [System.EnvironmentVariableTarget]::User)    
+    }
 }
 
-function Remove-EnvironmentVariable([string] $VarName) {
+function Remove-EnvironmentVariable([string] $VarName, [String]$Scope = "All") {
     Write-Message -Message "Remove environment variable '$VarName'"
     $VarValue = $null
-    [System.Environment]::SetEnvironmentVariable($VarName, $VarValue, [System.EnvironmentVariableTarget]::Machine)
-    [System.Environment]::SetEnvironmentVariable($VarName, $VarValue, [System.EnvironmentVariableTarget]::Process)
-    [System.Environment]::SetEnvironmentVariable($VarName, $VarValue, [System.EnvironmentVariableTarget]::User)
+    Set-EnvironmentVariable -VarName $VarName -VarValue $VarValue -Scope $Scope
 }
 
 function Refresh-EnvironmentPath()

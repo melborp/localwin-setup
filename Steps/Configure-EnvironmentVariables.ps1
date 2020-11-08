@@ -15,6 +15,7 @@ $Config.EnvironmentPathAdd | ForEach-Object {
     Set-EnvironmentPath -NewValue "$_"
 }
 
+#Value for Scope can be "User, Machine, All" where User = User + Process; Machine = Machine + Process; All = all 3 scopes are applied.
 Write-Message -Message "Removing environment vars"
 $Config.EnvironmentVarsRemove | ForEach-Object {
     Remove-EnvironmentVariable @_

@@ -44,7 +44,8 @@
           "name": "PowerShell",
           "source": "Windows.Terminal.PowershellCore",
           "colorScheme": "One Half Dark",
-          "startingDirectory": "c:\\repos"
+          "startingDirectory": "c:\\repos",
+          "fontFace": "Cascadia Code PL"
         },
         {
           // Make changes here to the cmd.exe profile.

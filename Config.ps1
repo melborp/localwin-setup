@@ -104,8 +104,8 @@
         "Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck"
     );
     PipInstallCommands = @(
-        # "pip3 install mkdocs-exclude",
-        # "pip install mkdocs-material@4.6.3"
+        # @{ Exec = "pip3.exe"; Args = @("install","mkdocs-exclude"); }
+        # @{ Exec = "pip.exe"; Args = @("install","mkdocs-material==4.6.3"); }
     );
     ZipInstallSoftware = @(
         #@{ Url = "";}

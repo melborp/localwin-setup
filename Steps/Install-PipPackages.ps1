@@ -7,5 +7,7 @@ Param(
 
 Write-Message -Message "Installing PIP Packages"
 $Config.PipInstallCommands | Foreach-Object {
-    & $_
+    Write-Host "Running command '$($_.Exec)' and '$($_.Args)'"
+    
+    &"$($_.Exec)" $_.Args    
 }

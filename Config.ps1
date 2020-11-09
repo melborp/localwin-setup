@@ -103,6 +103,10 @@
         "Install-Module -Name oh-my-posh",
         "Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck"
     );
+    PipInstallCommands = @(
+        # "pip3 install mkdocs-exclude",
+        # "pip install mkdocs-material@4.6.3"
+    );
     ZipInstallSoftware = @(
         #@{ Url = "";}
     );

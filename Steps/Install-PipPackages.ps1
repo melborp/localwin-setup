@@ -6,6 +6,6 @@ Param(
 . "$PSScriptRoot\..\Common-Functions.ps1"
 
 Write-Message -Message "Installing PIP Packages"
-$Config.PipPackages | Foreach-Object {
+$Config.PipInstallCommands | Foreach-Object {
     & $_
 }

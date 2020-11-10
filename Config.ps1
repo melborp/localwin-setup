@@ -116,7 +116,9 @@
     );
     
     EnvironmentPathAdd = @(
-        "C:\Python27amd64"
+        @{ VarValue = "X:\cache\user\npm\prefix"; Scope = "User"; }
+        @{ VarValue = "C:\Python39"; Scope = "All"; }
+        @{ VarValue = "C:\Python39\Scripts"; Scope = "All"; }
     );
     EnvironmentPathRemove = @(
     );

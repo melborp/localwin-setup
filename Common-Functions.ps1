@@ -36,28 +36,40 @@ function Refresh-EnvironmentPath()
 {
     $env:Path = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::Machine)
 }
-function Remove-EnvironmentPath([string]$ExistingValue) {
-    Write-Message -Message "Remove environment path '$ExistingValue'"
-    $currentSystemPath = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::Machine)
+function Remove-EnvironmentPath([string] $VarValue, [ValidateSet("All", "User", "Machine")][String]$Scope = "All") {
+    Write-Message -Message "Remove environment path '$VarValue'"
+
+    $pathQueryScope = [System.EnvironmentVariableTarget]::User
+    if ($Scope -eq "All" -or $Scope -eq "Machine") {
+        $pathQueryScope = [System.EnvironmentVariableTarget]::Machine
+    }
+
+    $currentSystemPath = [System.Environment]::GetEnvironmentVariable("PATH", $pathQueryScope)
     $allCurrentPaths = $currentSystemPath.Split(";", [System.StringSplitOptions]::RemoveEmptyEntries)
     $newPath = [string]::Empty
     $allCurrentPaths | ForEach-Object {
         $item = $_.Trim().ToLower()
-        if ($item -ne $ExistingValue.Trim().ToLower()) {
+        if ($item -ne $VarValue.Trim().ToLower()) {
             $newPath += "$($_.Trim());"
         }
     }
-    Set-EnvironmentVariable -VarName "PATH" -VarValue $newPath
+    Set-EnvironmentVariable -VarName "PATH" -VarValue $newPath -Scope $Scope
 }
 
-function Set-EnvironmentPath([string]$NewValue) {
-    Write-Message -Message "Add environment path '$NewValue'"
-    $currentSystemPath = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::Machine)
+function Set-EnvironmentPath([string] $VarValue, [ValidateSet("All", "User", "Machine")][String]$Scope = "All") {
+    Write-Message -Message "Add environment path '$VarValue'"
+
+    $pathQueryScope = [System.EnvironmentVariableTarget]::User
+    if ($Scope -eq "All" -or $Scope -eq "Machine") {
+        $pathQueryScope = [System.EnvironmentVariableTarget]::Machine
+    }
+
+    $currentSystemPath = [System.Environment]::GetEnvironmentVariable("PATH", $pathQueryScope)
     $allCurrentPaths = $currentSystemPath.Split(";", [System.StringSplitOptions]::RemoveEmptyEntries)
     $contains = $False
     $allCurrentPaths | ForEach-Object {
         $item = $_.Trim().ToLower()
-        if ($item -eq $NewValue.Trim().ToLower()) {
+        if ($item -eq $VarValue.Trim().ToLower()) {
             $contains = $True
             return
         }
@@ -68,9 +80,9 @@ function Set-EnvironmentPath([string]$NewValue) {
         $allCurrentPaths | ForEach-Object {
             $newPath += "$($_.Trim());"
         }
-        $newPath += "$($NewValue.Trim());"
+        $newPath += "$($VarValue.Trim());"
         
-        Set-EnvironmentVariable -VarName "PATH" -VarValue $newPath
+        Set-EnvironmentVariable -VarName "PATH" -VarValue $newPath -Scope $Scope
     }
 }
 

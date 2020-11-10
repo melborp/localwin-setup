@@ -7,12 +7,12 @@ Param(
 
 Write-Message -Message "Removing environment path"
 $Config.EnvironmentPathRemove | ForEach-Object {
-    Remove-EnvironmentPath -ExistingValue "$_"
+    Remove-EnvironmentPath @_
 }
 
 Write-Message -Message "Adding environment path"
 $Config.EnvironmentPathAdd | ForEach-Object {
-    Set-EnvironmentPath -NewValue "$_"
+    Set-EnvironmentPath @_
 }
 
 #Value for Scope can be "User, Machine, All" where User = User + Process; Machine = Machine + Process; All = all 3 scopes are applied.

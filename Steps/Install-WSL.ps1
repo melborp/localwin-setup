@@ -17,7 +17,7 @@ $WSLupdateLocation = Join-Path $SoftwarePath wsl_update_x64.msi
 $WSLinstall_log = Join-Path $PSScriptRootLogs wsl_update_x64-install.log
 
 $DistroPackageLocation = Join-Path $SoftwarePath Debian.appx
-$DistroPackageURI = "https://aka.ms/wsl-debian-gnulinux"
+$DistroPackageURI = $Config.WSLDistroPackageURI
 
 if ($WSLstate -eq "Enabled") {
     Write-Message "Windows-Subsystem-for-Linux is already enabled"

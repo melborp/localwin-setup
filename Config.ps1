@@ -22,6 +22,7 @@
         'C:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup',
         'C:\Temp\'
     );
+    WSLDistroPackageURI = "https://aka.ms/wsl-debian-gnulinux"
     CacheRootLocation = 'c:\cache';
     SoftwarePath = 'C:\Software';
     ToolsPath = 'C:\tools';

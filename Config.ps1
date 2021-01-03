@@ -12,7 +12,17 @@
         "Install-VsCodeExtensions",
         "Configure-Profile"
     );
-    LocalPaths = @('c:\repos','c:\cache\npm','c:\cache\nuget','c:\cache\software','c:\tools', 'C:\Software');
+    LocalPaths = @(
+        'c:\Repos',
+        'c:\cache\npm',
+        'c:\cache\nuget',
+        'c:\cache\software',
+        'c:\tools',
+        'C:\Software',
+        'C:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup',
+        'C:\Temp\'
+    );
+    WSLDistroPackageURI = "https://aka.ms/wsl-debian-gnulinux"
     CacheRootLocation = 'c:\cache';
     SoftwarePath = 'C:\Software';
     ToolsPath = 'C:\tools';
@@ -114,7 +124,12 @@
         # Colorscheme "One Half Dark" is builtin to windows terminal, no color tool needed.
         #@{ Url = "https://github.com/microsoft/terminal/releases/download/1904.29002/ColorTool.zip"; FolderName = "ColorTool"; }
     );
-    
+    Shortcuts = @(
+        @{ scName = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\test"; Target = "C:\Test\test.exe"; };
+    );
+    CommonFiles = @(
+        @{ Path = "C:\Backup\commonfiles\"; Destination = "C:\Files\commonfiles"; };
+    );
     EnvironmentPathAdd = @(
         @{ VarValue = "X:\cache\user\npm\prefix"; Scope = "User"; }
         @{ VarValue = "C:\Python39"; Scope = "All"; }

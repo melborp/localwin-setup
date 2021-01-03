@@ -4,6 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 Taavi-Config.ps1
+Raiko-Config.ps1
 
 # User-specific files
 *.rsuser

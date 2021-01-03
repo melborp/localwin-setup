@@ -85,4 +85,3 @@ function Set-EnvironmentPath([string] $VarValue, [ValidateSet("All", "User", "Ma
         Set-EnvironmentVariable -VarName "PATH" -VarValue $newPath -Scope $Scope
     }
 }
-

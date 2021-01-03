@@ -124,7 +124,7 @@
         #@{ Url = "https://github.com/microsoft/terminal/releases/download/1904.29002/ColorTool.zip"; FolderName = "ColorTool"; }
     );
     Shortcuts = @(
-        @{ Name = "C:\Test\test.exe"; Target = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\test.lnk"; };
+        @{ scName = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\test"; Target = "C:\Test\test.exe"; };
     );
     CommonFiles = @(
         @{ Path = "C:\Backup\commonfiles\"; Destination = "C:\Files\commonfiles"; };

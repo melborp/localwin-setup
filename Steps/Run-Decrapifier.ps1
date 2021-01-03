@@ -16,16 +16,17 @@ Param(
 # In Use -AppsOnly -Tablet -OneDrive -ClearStart -AppAccess
 
 $ExecPolicy = Set-ExecutionPolicy Bypass -Scope Process -Force
-$PSScriptRootScripts = Join-Path $PSScriptRoot "Scripts"
 
-$DecrapTestFile = Join-Path $LogsPath run_decrapifier_completed
+$PSScriptRootLogs = "$PSScriptRoot\..\Logs"
+$PSScriptRootScripts = "$PSScriptRoot\..\Scripts"
+
+$DecrapTestFile = Join-Path $PSScriptRootLogs run_decrapifier_completed
 $DecrapScript = Join-Path $PSScriptRootScripts decrapifier.ps1
 
-If (Test-Path $DecrapTestFile -Type Leaf) {
+if (Test-Path $DecrapTestFile -Type Leaf) {
     Write-Message "Decrapifier has already been run"
-} Else {
+} else {
     Write-Message "Running Decrapifier"
     New-Item -ItemType file $DecrapTestFile -Verbose
     Start-Process PowerShell.exe -ArgumentList "-NoProfile", "-command $ExecPolicy; $DecrapScript -AppsOnly -Tablet -OneDrive -ClearStart -AppAccess" -Wait
-
 }

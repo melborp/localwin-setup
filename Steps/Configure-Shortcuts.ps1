@@ -7,10 +7,14 @@ Param(
 
 # Creating Shortcuts
 $Config.Shortcuts | Foreach-Object {
-    if (Test-Path ($_.Target) -Type Leaf ) {
-        Write-Message -Message "Shortcut for "$($_.Name)" exsists"
+    if (Test-Path $($_.scName + ".lnk") -Type Leaf ) {
+        Write-Message -Message "Shortcut for '$($_.scName)' exsists"
     } else {
-        Write-Message -Message "Creating a shortcut for "$($_.Name)""
-        Add-Shortcut $($_.Name) $($_.Target)
+        Write-Message -Message "Creating a shortcut for '$($_.scName)'"
+        $TargetFile
+        $WScriptShell = New-Object -ComObject WScript.Shell
+        $Shortcut = $WScriptShell.CreateShortcut($($_.scName + ".lnk"))
+        $Shortcut.TargetPath = $($_.Target)
+        $Shortcut.Save()
     }
 }

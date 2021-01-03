@@ -7,13 +7,14 @@ Param(
 
 $ExecPolicy = Set-ExecutionPolicy Bypass -Scope Process -Force
 $SoftwarePath = $Config.SoftwarePath
+$PSScriptRootLogs = "$PSScriptRoot\..\Logs"
 
 $WSLstate = (Get-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online).State 
 $WSLinstall = Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
 
 $WSLupdateURI = "https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi"
 $WSLupdateLocation = Join-Path $SoftwarePath wsl_update_x64.msi
-$WSLinstall_log = Join-Path $LogsPath wsl_update_x64-install.log
+$WSLinstall_log = Join-Path $PSScriptRootLogs wsl_update_x64-install.log
 
 $DistroPackageLocation = Join-Path $SoftwarePath Debian.appx
 $DistroPackageURI = "https://aka.ms/wsl-debian-gnulinux"

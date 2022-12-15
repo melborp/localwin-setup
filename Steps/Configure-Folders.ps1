@@ -8,5 +8,6 @@ Param(
 $Config.LocalPaths | ForEach-Object {
     if ((Test-Path "$_") -eq $false) {
         New-Item -Path $_ -Force -ItemType Directory -Verbose
+	icacls "$_" /t /grant "$($Config.UserAccount):(OI)(CI)M"
     }    
 }

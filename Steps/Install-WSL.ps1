@@ -37,7 +37,9 @@ if (Test-Path $WSLinstall_log -Type Leaf) {
 if (Test-Path $DistroPackageLocation -Type Leaf) {
     Write-Message "Debian Distro for WSL already installed. Skipping"
 } else {
-    Write-Message "Installing Debian Distro for WSL"
-    Invoke-WebRequest -Uri $DistroPackageURI -OutFile $DistroPackageLocation -UseBasicParsing -Verbose
-    Add-AppxPackage $DistroPackageLocation -Verbose
+    if ($DistroPackageURI -ne "") {
+      Write-Message "Installing Debian Distro for WSL"
+      Invoke-WebRequest -Uri $DistroPackageURI -OutFile $DistroPackageLocation -UseBasicParsing -Verbose
+      Add-AppxPackage $DistroPackageLocation -Verbose
+    }
 }

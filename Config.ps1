@@ -9,7 +9,8 @@
         "Install-ZipPackages",
         "Install-NpmGlobalTools",
         "Install-VsCodeExtensions",
-        "Install-WSL.ps1"
+        "Install-WSL.ps1",
+        "Configure-GitProfile"
     );
     LocalPaths = @(
         'c:\Repos',

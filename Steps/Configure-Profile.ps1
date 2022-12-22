@@ -16,8 +16,3 @@ if (-not (Test-Path "C:\Users\$env:USERNAME\Documents\PowerShell")) {
     New-Item -ItemType Directory -Path "C:\Users\$env:USERNAME\Documents\PowerShell" -Verbose
 }
 Set-Content -Encoding utf8 -Path "C:\Users\$env:USERNAME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Value $psProfile -Verbose    
-
-# Configure git
-git config --global user.name "$($Config.Git.Username)"
-git config --global user.email "$($Config.Git.Email)"
-git config --global remote.origin.prune $($Config.Git.Prune)

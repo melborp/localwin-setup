@@ -9,8 +9,8 @@ $ExecPolicy = Set-ExecutionPolicy Bypass -Scope Process -Force
 $SoftwarePath = $Config.SoftwarePath
 $PSScriptRootLogs = "$PSScriptRoot\..\Logs"
 
-$WSLstate = (Get-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online).State 
-$WSLinstall = Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
+
+$WindowsFeatures = @('HypervisorPlatform', 'VirtualMachinePlatform', 'Microsoft-Windows-Subsystem-Linux')
 
 $WSLupdateURI = "https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi"
 $WSLupdateLocation = Join-Path $SoftwarePath wsl_update_x64.msi
@@ -19,11 +19,15 @@ $WSLinstall_log = Join-Path $PSScriptRootLogs wsl_update_x64-install.log
 $DistroPackageLocation = Join-Path $SoftwarePath Debian.appx
 $DistroPackageURI = $Config.WSLDistroPackageURI
 
-if ($WSLstate -eq "Enabled") {
-    Write-Message "Windows-Subsystem-for-Linux is already enabled"
-} else {
-    Write-Message "Enabling Windows-Subsystem-for-Linux"
-    Start-Process PowerShell.exe -ArgumentList "-NoProfile", "-command $ExecPolicy; $WSLinstall" -Wait
+$WindowsFeatures | ForEach-Object {
+    $WinFeatureState = (Get-WindowsOptionalFeature -FeatureName $_ -Online).State 
+    
+    if ($WinFeatureState -eq "Enabled") {
+        Write-Message "$_ is already enabled"
+    } else {
+        Write-Message "Enabling $_"
+        Enable-WindowsOptionalFeature -Online -FeatureName $_ -NoRestart
+    }
 }
 
 if (Test-Path $WSLinstall_log -Type Leaf) {
